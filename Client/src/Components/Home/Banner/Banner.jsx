@@ -1,6 +1,6 @@
 import React from 'react'
 import Bannerimg from'../../../Assets/banner-img.png'
-import './Banner.css'
+import './Banner.scss'
 export default function Banner() {
   return (
     <div className='hero-banner'>
