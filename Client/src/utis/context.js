@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 export const Context= createContext();
 
@@ -7,9 +7,13 @@ export const useContextProvider=()=>{
 }
 const AppContext=({children})=>{
     
-    
+    const[searchOn,SetSearchOn]=useState(false);
+    const values={
+        searchOn:searchOn,
+        SetSearchOn:SetSearchOn
+    }
     return(
-        <Context.Provider >
+        <Context.Provider value={values} >
         {children}
         </Context.Provider>
     )
