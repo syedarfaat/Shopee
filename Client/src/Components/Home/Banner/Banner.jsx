@@ -1,7 +1,9 @@
 import React from 'react'
 import Bannerimg from'../../../Assets/banner-img.png'
 import './Banner.scss'
+import { useNavigate } from 'react-router-dom'
 export default function Banner() {
+  const Navigate=useNavigate();
   return (
     <div className='hero-banner'>
          <div className='content'>
@@ -14,7 +16,7 @@ export default function Banner() {
                 </p>
                 <div className='ctas'>
                     <div className='banner-cta'>Read More</div>
-                    <div className='banner-cta v2'>Shop Now</div>
+                    <div className='banner-cta v2' onClick={()=>Navigate('/product/6')}>Shop Now</div>
                 </div>
                 </div>
             <img className='banner-img' alt='' src={Bannerimg}/>

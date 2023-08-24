@@ -1,22 +1,29 @@
 import React from 'react'
 import Product from './Product/Product'
 import './Products.scss'
-import headphonepic from '../../Assets/products/headphone-prod-6.webp'
-import speaker from '../../Assets/products/speaker-prod-1.webp'
-import earbuds from '../../Assets/products/earbuds-prod-2.webp'
+import { useContextProvider } from '../../utis/context'
+
 export default function Products() {
+  const {products}=useContextProvider();
+  console.log(products);
+  
   return (
     <div className='products-container'>
         <div className='sec-heading'>Products</div>
         <div className='products'>
-         <Product picutre={headphonepic}/>
-         <Product picutre={speaker}/>
-         <Product picutre={headphonepic}/>
-         <Product picutre={headphonepic}/>
-         <Product picutre={earbuds}/>
-         <Product picutre={headphonepic}/>
-         <Product picutre={headphonepic}/>
-         <Product picutre={speaker}/>
+       
+        {products?.data?.map((item)=>(
+          <Product 
+            id={item.id}
+            picutre={
+                process.env.REACT_APP_DEV_URL+
+                item.attributes.img.data.attributes.url
+            } 
+            product_name={item.attributes.product_name} 
+            price={item.attributes.price}
+             />)
+        )}
+         
 
         </div>
     </div>

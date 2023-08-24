@@ -6,18 +6,27 @@ import Earpod4 from '../../../Assets/products/earbuds-prod-4.webp';
 import Earpod5 from '../../../Assets/products/earbuds-prod-5.webp';
 import Product from '../Product/Product';
 import './RelatedProduct.scss';
+import useFetch from '../../../hooks/useFetch';
 
-export default function RelatedProduct() {
+export default function RelatedProduct({CategoryId,ItemId}) {
+  const {data}=useFetch(`/api/products?populate=*&[filters][categories][id]=${CategoryId}`);
+  console.log(data);
   return (
     <div className='related-products'>
     <div className='related-products-heading'>Related Products</div>
     <div className='products-strip'>
     
-    <Product picutre={Earpod1}/>
-    <Product picutre={Earpod2}/>
-    <Product picutre={Earpod3}/>
-    <Product picutre={Earpod4}/>
-    <Product picutre={Earpod5}/>
+    {data?.data?.filter(item=>item.id!=ItemId).map((item)=>(
+          <Product 
+            picutre={
+                process.env.REACT_APP_DEV_URL+
+                item.attributes.img.data.attributes.url
+            } 
+            product_name={item.attributes.product_name} 
+            price={item.attributes.price}
+            id={item.id}
+             />)
+        )}
     </div>
         
     </div>

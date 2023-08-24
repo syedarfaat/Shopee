@@ -6,11 +6,16 @@ export const useContextProvider=()=>{
     return useContext(Context)
 }
 const AppContext=({children})=>{
-    
+    const[categories,setCategories]=useState();
+    const[products,setProducts]=useState();
     const[searchOn,SetSearchOn]=useState(false);
     const values={
-        searchOn:searchOn,
-        SetSearchOn:SetSearchOn
+        searchOn,
+        SetSearchOn,
+        categories,
+        setCategories,
+        products,
+        setProducts
     }
     return(
         <Context.Provider value={values} >

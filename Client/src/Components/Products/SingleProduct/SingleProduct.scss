@@ -2,10 +2,11 @@
 .single-product-main-cotent {
     margin: 40px 0;
     .single-product-layout {
-        max-width: calc(100% - 40px);
+        max-width: calc(100% - 20px);
         margin: 0 auto;
         @include lg {
             max-width: 1200px;
+            padding: 10px;
         }
         .single-product-page {
             margin: 0 auto;

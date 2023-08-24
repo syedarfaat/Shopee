@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useContext } from 'react'
-import './header.css'
+import { useNavigate } from 'react-router-dom'
+import './header.scss'
 import Search from './Search/Search'
+
 
 import {TbSearch} from "react-icons/tb"
 import {CgShoppingCart} from "react-icons/cg"
@@ -12,6 +14,7 @@ import { useContextProvider } from '../../utis/context'
 
 
 export default function Header() {
+  const Navigate=useNavigate();
 const [sticky, setsticky]=useState(false);
  const [CartOpen,setCart]=useState(false);
     useEffect( ()=>{
@@ -28,7 +31,7 @@ const [sticky, setsticky]=useState(false);
     {searchOn&&<Search/>}
       <div className='header-content'>
         <ul className='left' >
-          <li>HOME</li>
+          <li onClick={()=>Navigate("/")}>HOME</li>
           <li>ABOUT</li>
           <li>CATEGORIES</li>
         </ul>

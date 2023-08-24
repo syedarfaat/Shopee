@@ -1,25 +1,24 @@
 import React from 'react'
 import './Category.scss'
-import headphones from '../../../Assets/category/cat-1.jpg'
-import sWatch from '../../../Assets/category/cat-2.jpg'
-import Airpods from '../../../Assets/category/cat-3.jpg'
-import Speakers from '../../../Assets/category/cat-4.jpg'
+import {useNavigate} from "react-router-dom"
+
+import { useContextProvider } from '../../../utis/context'
 
 export default function Category() {
+  const naviate=useNavigate();
+  const {categories}=useContextProvider();
+  console.log(categories)
   return (
     <div className='categories-strip'>
-      <div className='category'>
-        <img src={headphones}/> 
-      </div>
-      <div className='category'>
-        <img src={sWatch}/> 
-      </div>
-      <div className='category'>
-        <img src={Airpods}/> 
-      </div>
-      <div className='category'>
-        <img src={Speakers}/> 
-      </div>
+      {categories?.data?.map((item)=>
+        (
+          <div className='category' key={item.id} onClick={()=>naviate(`/category/${item.id}`)}>
+          <img src={
+            process.env.REACT_APP_DEV_URL +
+          item.attributes.img.data.attributes.url
+          } alt=''/>
+          </div>
+        ))}
       
     </div>
   )

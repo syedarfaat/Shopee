@@ -31,6 +31,9 @@
                 margin-right: 14px;
                 cursor: pointer;
                 font-size: 14px;
+                &:hover {
+                    color: #8e2de2;
+                }
             }
         }
         .title {
