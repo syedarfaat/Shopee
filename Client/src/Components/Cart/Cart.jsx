@@ -3,8 +3,10 @@ import {MdClose} from 'react-icons/md';
 import {BsCartX} from 'react-icons/bs'
 import './Cart.scss'
 import Cartitem from './Cartitem/Cartitem';
+import { useContextProvider } from '../../utis/context';
 
 export default function Cart({setCart}) {
+    const {cartItems,cartCount}=useContextProvider();
   return (
     <div className='cart-panel'>
         <div className='opac-layer'></div>
@@ -21,28 +23,35 @@ export default function Cart({setCart}) {
               </span>
             </div>
         
-           {/* <div className="empty-cart">
+           { cartItems.length==0&&<div className="empty-cart">
                 <BsCartX />
                 <span>No products in the cart.</span>
                 <button className='return-cta'>return to shop</button>
             </div>
-  */}
+  }
         <>
         <div className='items-container'>
-        <Cartitem/> 
-        <Cartitem/> 
-        <Cartitem/> 
-        <Cartitem/> 
         
+        {cartItems?.map(product=>{
+            return <Cartitem 
+            picture={process.env.REACT_APP_DEV_URL+product.item.data[0].attributes.img.data.attributes.url}
+            name={product.item.data[0].attributes.product_name}
+            price={product.item.data[0].attributes.price}
+            count={product.count}
+            product={product.item}
+            /> 
+        }
 
+            
+        )}
         
 
         </div>
-        <div className="cart-footer">
+        {cartItems.length>=1&&<div className="cart-footer">
                 <div className="subtotal">
                     <span className="text">Subtotal:</span>
                     <span className="text total">
-                                    &#8377;234253
+                                    &#8377;{cartCount}
                                 </span>
                             </div>
                             <div className="button">
@@ -53,7 +62,7 @@ export default function Cart({setCart}) {
                                     Checkout
                                 </button>
                             </div>
-                        </div>
+                        </div>}
         </>
         </div>
     </div>

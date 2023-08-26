@@ -1,15 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './SingleProduct.scss'
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaPinterest, FaCartPlus } from 'react-icons/fa'
-import earbuds from '../../../Assets/products/earbuds-prod-2.webp'
 import RelatedProduct from './RelatedProduct'
 import { useParams } from 'react-router-dom'
 import useFetch from '../../../hooks/useFetch'
+import { useContextProvider } from '../../../utis/context'
+import { useLocation } from 'react-router-dom'
+
 export default function SingleProduct() {
-  window.scrollTo({top:0,behavior:'smooth'});
+  const Location=useLocation();
+  
+  const{addToCart,cartItems,handleRemoveFromCart}=useContextProvider();
   const {id}=useParams();
   const {data}=useFetch(`/api/products?populate=*&[filters][id]=${id}`);
-  console.log(data)
+  console.log(data);
+  const [cartSize,EditCart]=useState(1);
+
+  useEffect(()=>{
+    window.scrollTo({top:0,behavior:'smooth'});
+    EditCart(1);
+  },[Location])
+
+  const increment=()=>{
+    EditCart(prev=>prev+1);
+  }
+  const decrement=()=>{
+    EditCart(prev=>
+      {
+        if(prev==1)return 1;
+        else return prev-1
+      });
+  }
+  
   return (
     <div className='single-product-main-cotent'>
     <div className='single-product-layout'>
@@ -24,12 +46,14 @@ export default function SingleProduct() {
                 <div className='description'>{data?.data[0]?.attributes.description}</div>
                 <div className='inputs'>
                 <div className='quantity-buttons'>
-                <span className='plus'>+</span>
-                <span className='numbers'>5</span>
-                <span className='negetive'>-</span>
+                <span onClick={()=>{decrement()}}>-</span>
+                      <span >{cartSize}</span>
+                      <span onClick={()=>{increment()}}>+</span>
+                      
                 </div>
-                <button className="cart-button"><FaCartPlus/> Add to Cart </button>
+                <button className="cart-button" onClick={()=>{addToCart({item:data,count:cartSize})}}><FaCartPlus/> Add to Cart </button>
                 </div>
+          
               </div>
               <div className='meta-data'>
               <div className='category-detials'>

@@ -5,6 +5,7 @@ import './header.scss'
 import Search from './Search/Search'
 
 
+
 import {TbSearch} from "react-icons/tb"
 import {CgShoppingCart} from "react-icons/cg"
 import {AiOutlineHeart} from "react-icons/ai"
@@ -23,7 +24,7 @@ const [sticky, setsticky]=useState(false);
       })
   }
   ,[])
-  const {searchOn,SetSearchOn}=useContextProvider();
+  const {searchOn,SetSearchOn,cartItems}=useContextProvider();
   
   return (
     <>
@@ -35,7 +36,7 @@ const [sticky, setsticky]=useState(false);
           <li>ABOUT</li>
           <li>CATEGORIES</li>
         </ul>
-        <div className='title'>
+        <div className='title' onClick={()=>Navigate('/')}>
           SHOPEE. 
         </div>
         <div className='right'>
@@ -43,9 +44,9 @@ const [sticky, setsticky]=useState(false);
         <AiOutlineHeart/>
           <span className='cart-icon' onClick={()=>setCart(true)}>
             <CgShoppingCart/>
-            <span>
-                  5
-            </span>
+            {cartItems.length>0&&<span>
+                  {cartItems.length}
+            </span>}
             </span>
         </div>
         </div>
