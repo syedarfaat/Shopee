@@ -26,12 +26,6 @@
         "audios"
       ]
     },
-    "Price": {
-      "type": "integer"
-    },
-    "desc": {
-      "type": "text"
-    },
     "products": {
       "type": "relation",
       "relation": "manyToMany",
