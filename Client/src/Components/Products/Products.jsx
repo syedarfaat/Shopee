@@ -16,7 +16,6 @@ export default function Products() {
           <Product 
             id={item.id}
             picutre={
-                process.env.REACT_APP_DEV_URL+
                 item.attributes.img.data.attributes.url
             } 
             product_name={item.attributes.product_name} 

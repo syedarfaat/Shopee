@@ -19,12 +19,12 @@ const {setProducts}=useContextProvider();
 const getCategories=()=>{
   fetchDataFromApi("/api/categories?populate=*").then(res=>{
     setCategories(res);
-    console.log(res)})
+    })
 }
 const getProducts=()=>{
   fetchDataFromApi("/api/products?populate=*").then(res=>{
     setProducts(res);
-    console.log(res)})
+    })
 }
   
   return (

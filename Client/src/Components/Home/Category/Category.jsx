@@ -14,8 +14,7 @@ export default function Category() {
         (
           <div className='category' key={item.id} onClick={()=>naviate(`/category/${item.id}`)}>
           <img src={
-            process.env.REACT_APP_DEV_URL +
-          item.attributes.img.data.attributes.url
+          item.attributes.img.data.attributes.formats.medium.url
           } alt=''/>
           </div>
         ))}

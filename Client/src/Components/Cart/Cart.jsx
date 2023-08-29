@@ -4,12 +4,34 @@ import {BsCartX} from 'react-icons/bs'
 import './Cart.scss'
 import Cartitem from './Cartitem/Cartitem';
 import { useContextProvider } from '../../utis/context';
+import {loadStripe} from "@stripe/stripe-js" 
+import { makePaymentRequest } from '../../utis/api';
+
 
 export default function Cart({setCart}) {
+    const stripePromise = loadStripe(
+        process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+    );
+
+    const handlePayment = async () => {
+        try {
+            const stripe = await stripePromise;
+            const res = await makePaymentRequest.post("/api/orders", {
+                products: cartItems,
+            });
+            await stripe.redirectToCheckout({
+                sessionId: res.data.stripeSession.id,
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    
     const {cartItems,cartCount}=useContextProvider();
   return (
     <div className='cart-panel'>
-        <div className='opac-layer'></div>
+        <div className='opac-layer' onClick={()=>setCart(false)}></div>
         <div className='cart-content'>
             <div className="cart-header">
                 <span className="heading">SHOPPING CART
@@ -34,18 +56,14 @@ export default function Cart({setCart}) {
         
         {cartItems?.map(product=>{
             return <Cartitem 
-            picture={process.env.REACT_APP_DEV_URL+product.item.data[0].attributes.img.data.attributes.url}
-            name={product.item.data[0].attributes.product_name}
-            price={product.item.data[0].attributes.price}
-            count={product.count}
-            product={product.item}
+            picture={product.attributes.img.data.attributes.url}
+            name={product.attributes.product_name}
+            price={product.attributes.price}
+            count={product.attributes.quantity}
+            product={product}
             /> 
-        }
-
-            
-        )}
-        
-
+        })
+    }
         </div>
         {cartItems.length>=1&&<div className="cart-footer">
                 <div className="subtotal">
@@ -55,10 +73,7 @@ export default function Cart({setCart}) {
                                 </span>
                             </div>
                             <div className="button">
-                                <button
-                                    className="checkout-cta"
-                                    
-                                >
+                                <button className="checkout-cta" onClick={()=>handlePayment()}>
                                     Checkout
                                 </button>
                             </div>

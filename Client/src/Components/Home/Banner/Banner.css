@@ -1,10 +1,11 @@
 .hero-banner {
-  padding: 40px 0;
+  padding: 40px 0px;
   position: relative;
   background-image: linear-gradient(to right, #8e2de2, #4a00e0);
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
   .hero-banner {
+    padding: 10px 0px;
     height: calc(100vh - 80px);
   }
 }
@@ -25,20 +26,17 @@
   }
 }
 .hero-banner .content img {
-  position: relative;
-  z-index: 9;
   width: 200px;
-  margin-bottom: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 @media only screen and (min-width: 1024px) {
   .hero-banner .content img {
+    height: 100%;
     width: 400px;
-    margin-top: 50px;
-    margin-right: 60px;
-    margin-bottom: 30px;
   }
 }
-@media only screen and (min-width: 1536px) {
+@media only screen and (min-width: 1280px) {
   .hero-banner .content img {
     width: 600px;
     margin-right: 0;
@@ -52,7 +50,7 @@
   align-items: center;
   color: white;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
   .hero-banner .content .text-content {
     position: absolute;
     left: 50px;
@@ -71,7 +69,7 @@
   line-height: 1;
   margin-bottom: 20px;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
   .hero-banner .content .text-content h1 {
     font-size: 180px;
   }
@@ -82,7 +80,7 @@
   line-height: 20px;
   margin-bottom: 20px;
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
   .hero-banner .content .text-content p {
     max-width: 500px;
     font-size: 18px;

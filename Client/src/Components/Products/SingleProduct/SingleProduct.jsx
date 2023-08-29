@@ -12,10 +12,10 @@ export default function SingleProduct() {
   
   const{addToCart,cartItems,handleRemoveFromCart}=useContextProvider();
   const {id}=useParams();
+  console.log(id)
   const {data}=useFetch(`/api/products?populate=*&[filters][id]=${id}`);
   console.log(data);
   const [cartSize,EditCart]=useState(1);
-
   useEffect(()=>{
     window.scrollTo({top:0,behavior:'smooth'});
     EditCart(1);
@@ -37,7 +37,7 @@ export default function SingleProduct() {
     <div className='single-product-layout'>
       <div className='single-product-page'>
         <div className='product-picture'>
-        <img src={process.env.REACT_APP_DEV_URL+data?.data[0]?.attributes.img.data.attributes.url}/>
+        <img src={data?.data[0]?.attributes.img.data.attributes.url}/>
         </div>
         <div className='product-details'>
               <div className='product-main-details'>
@@ -51,7 +51,7 @@ export default function SingleProduct() {
                       <span onClick={()=>{increment()}}>+</span>
                       
                 </div>
-                <button className="cart-button" onClick={()=>{addToCart({item:data,count:cartSize})}}><FaCartPlus/> Add to Cart </button>
+                <button className="cart-button" onClick={()=>{addToCart({item:data?.data[0],count:cartSize})}}><FaCartPlus/> Add to Cart </button>
                 </div>
           
               </div>
