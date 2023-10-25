@@ -10,7 +10,7 @@ import AppContext, { useContextProvider } from "./utis/context"
 
 function App() {
   const {searchOn}=useContextProvider();
-  alert("The free version of Render can take up to a minute for the back-end to come online. Thank you for your patience:) ")
+  
   
   return (
     <BrowserRouter>

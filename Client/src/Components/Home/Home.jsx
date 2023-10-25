@@ -8,6 +8,8 @@ import Products from '../Products/Products'
 import { useContextProvider } from '../../utis/context'
 
 export default function Home() {
+  alert("The free version of Render can take up to a minute for the back-end to come online. Thank you for your patience:) ");
+
   useEffect(()=>{
     getCategories();
     getProducts()
