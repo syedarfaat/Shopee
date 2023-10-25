@@ -7,10 +7,14 @@ import Category from "./Components/Category/Category"
 import SingleProduct from "./Components/Products/SingleProduct/SingleProduct"
 import Newsletter from "./Components/Footer/Newsletter/Newsletter"
 import AppContext, { useContextProvider } from "./utis/context"
+import { useEffect } from "react"
 
 function App() {
   const {searchOn}=useContextProvider();
-  
+  useEffect(()=>{
+
+    alert("The free version of Render can take up to a minute for the back-end to come online. Thank you for your patience:) ");
+  },[])
   
   return (
     <BrowserRouter>
